@@ -1,0 +1,578 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="de"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Mannschaftskasse Live&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>* { margin: 0; padding: 0; box-sizing: border-box; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>html, body { width: 100%; height: 100%; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #e3f2fd 0%, #e8eaf6 100%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.container { max-width: 1400px; margin: 0 auto; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.header {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 2px 8px rgba(0,0,0,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.header h1 { color: #1a237e; font-size: 24px; margin-bottom: 10px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.sync-indicator {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: inline-flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 8px 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #e8f5e9;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #2e7d32;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.sync-dot { width: 8px; height: 8px; background: #4caf50; border-radius: 50%; animation: pulse 2s infinite; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.card {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: white;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 12px;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 15px;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 15px;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 2px 8px rgba(0,0,0,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid #e0e0e0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.nav {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-wrap: wrap;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: sticky;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 100;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 2px 8px rgba(0,0,0,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.nav button {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 10px 14px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.3s;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #e8eaf6;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #1a237e;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>white-space: nowrap;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex: 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-width: 80px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.nav button.active {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #3949ab;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.nav button:active {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: scale(0.95);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>h2 { font-size: 18px; color: #283593; margin-bottom: 12px; margin-top: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 15px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.stat {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #3949ab 0%, #5e35b1 100%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.stat-value { font-size: 24px; font-weight: bold; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.stat-label { font-size: 10px; opacity: 0.9; margin-top: 5px; text-transform: uppercase; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.stat.warning { background: linear-gradient(135deg, #c62828 0%, #d32f2f 100%); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.stat.success { background: linear-gradient(135deg, #00695c 0%, #00897b 100%); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.input-group {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>label {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #1a237e;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>input, select, textarea {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid #ccc;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: inherit;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>input:focus, select:focus {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>outline: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-color: #3949ab;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 0 3px rgba(57, 73, 171, 0.1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 12px 16px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn:active {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: scale(0.98);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn-primary {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #3949ab;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn-primary:active {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #283593;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn-secondary {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #e8eaf6;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #3949ab;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 8px 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn-danger {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #d32f2f;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 8px 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.list-item {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #f5f5f5;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-left: 4px solid #3949ab;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-wrap: wrap;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.list-item.open { border-left-color: #d32f2f; background: #ffebee; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.list-item.paid { border-left-color: #00897b; background: #e0f2f1; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.list-item-title { font-weight: 600; color: #1a237e; font-size: 13px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.list-item-subtitle { font-size: 11px; color: #666; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.list-item-amount { font-size: 15px; font-weight: bold; color: #3949ab; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.list-item.open .list-item-amount { color: #d32f2f; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.list-item.paid .list-item-amount { color: #00897b; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.section { display: none; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.section.active { display: block; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.message {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: fixed;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>right: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #4caf50;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 12px 16px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 12px rgba(0,0,0,0.2);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 1000;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@media (max-width: 768px) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>body { padding: 8px; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.header { padding: 12px; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.header h1 { font-size: 20px; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.nav button { padding: 10px 10px; font-size: 11px; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.card { padding: 12px; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.grid { grid-template-columns: 1fr; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h1&gt;⚽ Mannschaftskasse Live&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="sync-indicator" id="syncStatus"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="sync-dot"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span&gt;Bereit&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="nav" id="nav"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="message" style="display: none;"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="dashboard" class="section active"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="grid"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="stat"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="stat-value" id="kassenstand"&gt;€0.00&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="stat-label"&gt;Kassenstand&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="stat warning"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="stat-value" id="offeneBetraege"&gt;€0.00&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="stat-label"&gt;Offene Beträge&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="stat success"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="stat-value" id="mitgliederAnzahl"&gt;0&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="stat-label"&gt;Mitglieder&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2&gt;Mitglieder mit offenen Beträgen&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="offeneMitglieder"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="grid"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h2&gt;Top Strafen&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div id="topStrafenAnzahl"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="mitglieder" class="section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2&gt;Neues Mitglied hinzufügen&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="input-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label&gt;Name&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="text" id="mitgliedName" placeholder="Name eingeben"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="input-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label&gt;Rolle&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;select id="mitgliedRolle"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;option value="Spieler"&gt;Spieler&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;option value="Trainer"&gt;Trainer&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;option value="Vorstand"&gt;Vorstand&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button class="btn btn-primary" onclick="addMitglied()"&gt;Mitglied hinzufügen&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2&gt;Alle Mitglieder&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="mitgliederListe"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="katalog" class="section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2&gt;Neue Strafe hinzufügen&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="input-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label&gt;Name der Strafe&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="text" id="strafeName" placeholder="z.B. Handy klingelt"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="input-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label&gt;Betrag (€)&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="number" id="strafeBetrag" step="0.01" placeholder="5.00"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button class="btn btn-primary" onclick="addStrafenregel()"&gt;Strafe hinzufügen&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2&gt;Strafenkatalog&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="strafenListe"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="strafe" class="section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2&gt;Strafe eintragen&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="input-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label&gt;Mitglied&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;select id="strafeMitglied"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;option value=""&gt;-- Wählen --&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="input-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label&gt;Strafetyp&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;select id="strafeTyp"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;option value=""&gt;-- Wählen --&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="input-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label&gt;Datum&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="date" id="strafeDatum"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button class="btn btn-primary" onclick="addStrafe()"&gt;Strafe eintragen&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="zahlungen" class="section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2&gt;Zahlungseingang erfassen&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="input-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label&gt;Mitglied&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;select id="zahlungMitglied"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;option value=""&gt;-- Wählen --&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="input-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label&gt;Betrag (€)&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="number" id="zahlungBetrag" step="0.01" placeholder="0.00"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="input-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label&gt;Datum&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="date" id="zahlungDatum"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button class="btn btn-primary" onclick="addZahlung()"&gt;Zahlung erfassen&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2&gt;Zahlungseingänge&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="zahlungenListe"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const SUPABASE_URL = 'https://iyicjqpjoqfqhmlblogc.supabase.co';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml5aWNqcXBqb3FmcWhtbGJsb2djIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYxMTM4NTEsImV4cCI6MjEwMTY4OTg1MX0.67whA9kwGK3CQRtcEcDYQdrQvnkKnMq-7zZXsF3S68M';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>let data = { mitglieder: [], strafenkatalog: [], strafen: [], zahlungen: [] };</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>async function supabaseCall(table, method = 'GET', body = null) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const headers = {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>'apikey': SUPABASE_KEY,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>'Authorization': `Bearer ${SUPABASE_KEY}`,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>'Content-Type': 'application/json'</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const url = `${SUPABASE_URL}/rest/v1/${table}`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const options = { method, headers };</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (body) options.body = JSON.stringify(body);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const response = await fetch(url, options);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (!response.ok) throw new Error(`Error: ${response.status}`);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return await response.json();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} catch (error) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>showMessage('Verbindungsfehler');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>async function loadData() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const [mitglieder, strafenkatalog, strafen, zahlungen] = await Promise.all([</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>supabaseCall('spieler?order=id.asc'),</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>supabaseCall('strafenkatalog?order=id.asc'),</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>supabaseCall('strafen?order=datum.desc'),</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>supabaseCall('zahlungen?order=datum.desc')</p>
+<p class="p1"><span class="Apple-converted-space">                </span>]);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>data.mitglieder = mitglieder || [];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>data.strafenkatalog = strafenkatalog || [];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>data.strafen = strafen || [];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>data.zahlungen = zahlungen || [];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>updateUI();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} catch (error) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>console.error('Load error:', error);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function showMessage(msg) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const el = document.getElementById('message');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>el.textContent = msg;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>el.style.display = 'block';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>setTimeout(() =&gt; { el.style.display = 'none'; }, 3000);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function setupNav() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const pages = ['dashboard', 'mitglieder', 'katalog', 'strafe', 'zahlungen'];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const labels = ['Dashboard', 'Mitglieder', 'Katalog', 'Strafen', 'Zahlungen'];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let html = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>pages.forEach((page, i) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>html += `&lt;button class="nav-page ${page === 'dashboard' ? 'active' : ''}" onclick="switchPage('${page}')"&gt;${labels[i]}&lt;/button&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('nav').innerHTML = html;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function switchPage(page) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.querySelectorAll('.section').forEach(el =&gt; el.classList.remove('active'));</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.querySelectorAll('.nav-page').forEach(el =&gt; el.classList.remove('active'));</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById(page).classList.add('active');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>event.target.classList.add('active');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>async function addMitglied() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const name = document.getElementById('mitgliedName').value.trim();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const rolle = document.getElementById('mitgliedRolle').value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!name) { showMessage('Name erforderlich'); return; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const result = await supabaseCall('spieler', 'POST', { name, rolle, aktiv: true });</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (result &amp;&amp; !result.code) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('mitgliedName').value = '';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>showMessage('Mitglied hinzugefügt');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>loadData();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>async function deleteMitglied(id) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (confirm('Mitglied wirklich löschen?')) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>await supabaseCall(`spieler?id=eq.${id}`, 'DELETE');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>loadData();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>async function addStrafenregel() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const name = document.getElementById('strafeName').value.trim();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const betrag = parseFloat(document.getElementById('strafeBetrag').value);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!name || !betrag) { showMessage('Name und Betrag erforderlich'); return; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const result = await supabaseCall('strafenkatalog', 'POST', { name, betrag });</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (result &amp;&amp; !result.code) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('strafeName').value = '';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('strafeBetrag').value = '';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>showMessage('Strafe hinzugefügt');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>loadData();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>async function deleteStrafenregel(id) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (confirm('Strafe wirklich löschen?')) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>await supabaseCall(`strafenkatalog?id=eq.${id}`, 'DELETE');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>loadData();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>async function addStrafe() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const spieler_id = parseInt(document.getElementById('strafeMitglied').value);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const strafe_id = parseInt(document.getElementById('strafeTyp').value);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const datum = document.getElementById('strafeDatum').value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!spieler_id || !strafe_id || !datum) { showMessage('Alle Felder erforderlich'); return; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const strafenregel = data.strafenkatalog.find(s =&gt; s.id === strafe_id);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const result = await supabaseCall('strafen', 'POST', { spieler_id, strafe_id, betrag: strafenregel.betrag, datum, bezahlt: false });</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (result &amp;&amp; !result.code) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('strafeMitglied').value = '';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('strafeTyp').value = '';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>showMessage('Strafe eingetragen');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>loadData();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>async function deleteStrafe(id) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (confirm('Strafe wirklich löschen?')) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>await supabaseCall(`strafen?id=eq.${id}`, 'DELETE');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>loadData();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>async function addZahlung() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const spieler_id = parseInt(document.getElementById('zahlungMitglied').value);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const betrag = parseFloat(document.getElementById('zahlungBetrag').value);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const datum = document.getElementById('zahlungDatum').value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!spieler_id || !betrag || !datum) { showMessage('Alle Felder erforderlich'); return; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const result = await supabaseCall('zahlungen', 'POST', { spieler_id, betrag, datum });</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (result &amp;&amp; !result.code) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const spielerStrafen = data.strafen.filter(s =&gt; s.spieler_id === spieler_id &amp;&amp; !s.bezahlt);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let remaining = betrag;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>for (let strafe of spielerStrafen) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (remaining &lt;= 0) break;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (remaining &gt;= strafe.betrag) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>await supabaseCall(`strafen?id=eq.${strafe.id}`, 'PATCH', { bezahlt: true });</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>remaining -= strafe.betrag;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('zahlungMitglied').value = '';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('zahlungBetrag').value = '';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>showMessage('Zahlung erfasst');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>loadData();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>async function deleteZahlung(id) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (confirm('Zahlung wirklich löschen?')) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>await supabaseCall(`zahlungen?id=eq.${id}`, 'DELETE');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>loadData();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateUI() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateDashboard();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateMitgliederListe();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateStrafenListe();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateSelects();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateZahlungenListe();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateDashboard() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const zahlungen = data.zahlungen.reduce((sum, z) =&gt; sum + z.betrag, 0);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const offen = data.strafen.filter(s =&gt; !s.bezahlt).reduce((sum, s) =&gt; sum + s.betrag, 0);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('kassenstand').textContent = '€' + (zahlungen - offen).toFixed(2);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('offeneBetraege').textContent = '€' + offen.toFixed(2);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('mitgliederAnzahl').textContent = data.mitglieder.length;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let offeneMitgliederIds = [...new Set(data.strafen.filter(s =&gt; !s.bezahlt).map(s =&gt; s.spieler_id))];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let html = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>offeneMitgliederIds.forEach(mId =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const mitglied = data.mitglieder.find(m =&gt; m.id === mId);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const mitgliedOffen = data.strafen.filter(s =&gt; s.spieler_id === mId &amp;&amp; !s.bezahlt).reduce((sum, s) =&gt; sum + s.betrag, 0);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (mitglied) html += `&lt;div class="list-item open"&gt;&lt;div&gt;&lt;div class="list-item-title"&gt;${mitglied.name}&lt;/div&gt;&lt;/div&gt;&lt;div class="list-item-amount"&gt;€${mitgliedOffen.toFixed(2)}&lt;/div&gt;&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('offeneMitglieder').innerHTML = html || '&lt;p style="color: #666;"&gt;Alle bezahlt!&lt;/p&gt;';</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let strafenCount = {};</p>
+<p class="p1"><span class="Apple-converted-space">            </span>data.strafen.forEach(s =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const r = data.strafenkatalog.find(r =&gt; r.id === s.strafe_id);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (r) strafenCount[r.id] = (strafenCount[r.id] || 0) + 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>html = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Object.entries(strafenCount).sort((a, b) =&gt; b[1] - a[1]).slice(0, 5).forEach(([id, count]) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const r = data.strafenkatalog.find(r =&gt; r.id == id);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>html += `&lt;div style="padding: 8px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; font-size: 12px;"&gt;&lt;span&gt;${r?.name}&lt;/span&gt;&lt;strong&gt;${count}x&lt;/strong&gt;&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('topStrafenAnzahl').innerHTML = html || '&lt;p style="color: #666;"&gt;Keine&lt;/p&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateMitgliederListe() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let html = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>data.mitglieder.forEach(m =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>html += `&lt;div class="list-item"&gt;&lt;div&gt;&lt;div class="list-item-title"&gt;${m.name}&lt;/div&gt;&lt;/div&gt;&lt;button class="btn btn-danger" onclick="deleteMitglied(${m.id})"&gt;Löschen&lt;/button&gt;&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('mitgliederListe').innerHTML = html || '&lt;p style="color: #666;"&gt;Keine&lt;/p&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateStrafenListe() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let html = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>data.strafenkatalog.forEach(s =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const count = data.strafen.filter(st =&gt; st.strafe_id === s.id).length;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>html += `&lt;div class="list-item"&gt;&lt;div&gt;&lt;div class="list-item-title"&gt;${s.name}&lt;/div&gt;&lt;div class="list-item-subtitle"&gt;${count}x&lt;/div&gt;&lt;/div&gt;&lt;div style="display: flex; gap: 8px;"&gt;&lt;span class="list-item-amount"&gt;€${s.betrag.toFixed(2)}&lt;/span&gt;&lt;button class="btn btn-danger" onclick="deleteStrafenregel(${s.id})"&gt;Löschen&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('strafenListe').innerHTML = html || '&lt;p style="color: #666;"&gt;Keine&lt;/p&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateSelects() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let mHtml = '&lt;option value=""&gt;-- Wählen --&lt;/option&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>data.mitglieder.forEach(m =&gt; { mHtml += `&lt;option value="${m.id}"&gt;${m.name}&lt;/option&gt;`; });</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('strafeMitglied').innerHTML = mHtml;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('zahlungMitglied').innerHTML = mHtml;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let sHtml = '&lt;option value=""&gt;-- Wählen --&lt;/option&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>data.strafenkatalog.forEach(s =&gt; { sHtml += `&lt;option value="${s.id}"&gt;${s.name} (€${s.betrag.toFixed(2)})&lt;/option&gt;`; });</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('strafeTyp').innerHTML = sHtml;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateZahlungenListe() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let html = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>data.zahlungen.forEach(z =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const m = data.mitglieder.find(mi =&gt; mi.id === z.spieler_id);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>html += `&lt;div class="list-item paid"&gt;&lt;div&gt;&lt;div class="list-item-title"&gt;${m?.name}&lt;/div&gt;&lt;div class="list-item-subtitle"&gt;${z.datum}&lt;/div&gt;&lt;/div&gt;&lt;div style="display: flex; gap: 8px;"&gt;&lt;span class="list-item-amount"&gt;€${z.betrag.toFixed(2)}&lt;/span&gt;&lt;button class="btn btn-danger" onclick="deleteZahlung(${z.id})"&gt;Löschen&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('zahlungenListe').innerHTML = html || '&lt;p style="color: #666;"&gt;Keine&lt;/p&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('strafeDatum').valueAsDate = new Date();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('zahlungDatum').valueAsDate = new Date();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>setupNav();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>loadData();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>setInterval(loadData, 3000);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
